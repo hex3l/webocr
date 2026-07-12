@@ -11,13 +11,41 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
+    <div id="updateBanner" class="update-banner hidden" role="status" aria-live="polite">
+      <span class="update-text">A new version of WebOCR is available.</span>
+      <button type="button" id="reloadBtn" class="update-btn">Reload</button>
+      <button type="button" id="dismissBtn" class="update-close" aria-label="Dismiss">×</button>
+    </div>
     <header class="site-header">
       <div class="container header-inner">
         <h1 class="brand">
-          <span class="brand-mark">W</span>
-          <span>WebOCR</span>
+          <span class="brand-mark">WebOCR</span>
         </h1>
-        <p class="tagline">Private OCR in your browser · powered by Tesseract.js</p>
+        <p class="tagline">100% client-side OCR · images never leave your device · powered by Tesseract.js</p>
+      <div class="header-actions">
+        <a
+          id="starBtn"
+          class="star-btn"
+          href="https://github.com/hex3l/webocr"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Star webocr on GitHub"
+        >
+          <svg class="star-icon" viewBox="0 0 16 16" aria-hidden="true">
+            <path fill="currentColor" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25z"/>
+          </svg>
+          <span class="star-label">Star</span>
+          <span id="starCount" class="star-count">—</span>
+        </a>
+        <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch theme">
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0-5a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM4.2 4.2a1 1 0 0 1 1.4 0l1.5 1.5A1 1 0 1 1 5.7 7.1L4.2 5.6a1 1 0 0 1 0-1.4zm12.7 12.7a1 1 0 0 1 1.4 0l1.5 1.5a1 1 0 0 1-1.4 1.4l-1.5-1.5a1 1 0 0 1 0-1.4zM2 12a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1zm16 0a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1zM4.2 19.8a1 1 0 0 1 0-1.4l1.5-1.5a1 1 0 1 1 1.4 1.4l-1.5 1.5a1 1 0 0 1-1.4 0zM16.9 7.1a1 1 0 0 1 0-1.4l1.5-1.5a1 1 0 1 1 1.4 1.4l-1.5 1.5a1 1 0 0 1-1.4 0z"/>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+          </svg>
+        </button>
+      </div>
       </div>
     </header>
 
@@ -75,7 +103,7 @@
 
     <footer class="site-footer">
       <div class="container">
-        <p>Runs entirely in your browser. Images and recognized text never leave your device.</p>
+        <p class="copyright">© <span id="year"></span> hex3l · <a href="https://github.com/hex3l/webocr" target="_blank" rel="noopener noreferrer">GitHub</a></p>
       </div>
     </footer>
 

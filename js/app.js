@@ -18,6 +18,13 @@
     resultText: $("#resultText"),
     historyList: $("#historyList"),
     clearHistory: $("#clearHistory"),
+    updateBanner: $("#updateBanner"),
+    reloadBtn: $("#reloadBtn"),
+    dismissBtn: $("#dismissBtn"),
+    themeToggle: $("#themeToggle"),
+    iconSun: document.querySelector(".theme-icon-sun"),
+    iconMoon: document.querySelector(".theme-icon-moon"),
+    starCount: $("#starCount"),
   };
 
   const state = {
@@ -40,6 +47,49 @@
     populateLanguages();
     bindEvents();
     renderHistory();
+    initTheme();
+    registerServiceWorker();
+    fetchStarCount();
+  }
+
+  function fetchStarCount() {
+    const KEY = "webocr-stars";
+    const ONE_HOUR = 60 * 60 * 1000;
+    const cache = readStarCache();
+    if (cache && Date.now() - cache.ts < ONE_HOUR) {
+      els.starCount.textContent = String(cache.count);
+      return;
+    }
+    if (cache) els.starCount.textContent = String(cache.count);
+    fetch("https://api.github.com/repos/hex3l/webocr")
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((data) => {
+        if (typeof data.stargazers_count === "number") {
+          els.starCount.textContent = String(data.stargazers_count);
+          writeStarCache(data.stargazers_count);
+        }
+      })
+      .catch(() => {
+        if (!cache) els.starCount.textContent = "";
+      });
+  }
+
+  function readStarCache() {
+    try {
+      const raw = localStorage.getItem("webocr-stars");
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (typeof parsed.count === "number" && typeof parsed.ts === "number") {
+        return parsed;
+      }
+    } catch (_) {}
+    return null;
+  }
+
+  function writeStarCache(count) {
+    try {
+      localStorage.setItem("webocr-stars", JSON.stringify({ count, ts: Date.now() }));
+    } catch (_) {}
   }
 
   function populateLanguages() {
@@ -86,7 +136,6 @@
 
     els.changeImage.addEventListener("click", () => {
       resetImage();
-      els.fileInput.click();
     });
 
     els.runBtn.addEventListener("click", runOcr);
@@ -109,6 +158,67 @@
         }
       }
     });
+  }
+
+  function initTheme() {
+    const KEY = "webocr-theme";
+    const stored = localStorage.getItem(KEY);
+    if (stored === "light" || stored === "dark") {
+      document.documentElement.setAttribute("data-theme", stored);
+    }
+    updateToggleIcon();
+    els.themeToggle.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      const effective = current || (prefersDark ? "dark" : "light");
+      const next = effective === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem(KEY, next);
+      updateToggleIcon();
+    });
+  }
+
+  function updateToggleIcon() {
+    const current = document.documentElement.getAttribute("data-theme");
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    const effective = current || (prefersDark ? "dark" : "light");
+    const showSun = effective === "dark";
+    els.iconSun.classList.toggle("hidden", !showSun);
+    els.iconMoon.classList.toggle("hidden", showSun);
+    els.themeToggle.setAttribute(
+      "aria-label",
+      showSun ? "Switch to light theme" : "Switch to dark theme"
+    );
+  }
+
+  function registerServiceWorker() {
+    if (!("serviceWorker" in navigator)) return;
+    els.reloadBtn.addEventListener("click", () => location.reload());
+    els.dismissBtn.addEventListener("click", () =>
+      els.updateBanner.classList.add("hidden")
+    );
+    navigator.serviceWorker.addEventListener("message", (e) => {
+      if (e.data && e.data.type === "UPDATE_AVAILABLE") {
+        els.updateBanner.classList.remove("hidden");
+      }
+    });
+    const isLocal =
+      location.hostname === "localhost" ||
+      location.hostname === "127.0.0.1" ||
+      location.hostname === "0.0.0.0";
+    if (isLocal) {
+      navigator.serviceWorker.getRegistrations().then((regs) =>
+        regs.forEach((r) => r.unregister())
+      );
+      return;
+    }
+    navigator.serviceWorker.register("sw.js").catch((err) =>
+      console.warn("Service worker registration failed:", err)
+    );
   }
 
   function handleFile(file) {
@@ -359,5 +469,9 @@
       " " + d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   }
 
-  document.addEventListener("DOMContentLoaded", init);
+  document.addEventListener("DOMContentLoaded", () => {
+    const y = document.getElementById("year");
+    if (y) y.textContent = String(new Date().getFullYear());
+    init();
+  });
 })();
