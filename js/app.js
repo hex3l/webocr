@@ -162,10 +162,6 @@
 
   function initTheme() {
     const KEY = "webocr-theme";
-    const stored = localStorage.getItem(KEY);
-    if (stored === "light" || stored === "dark") {
-      document.documentElement.setAttribute("data-theme", stored);
-    }
     updateToggleIcon();
     els.themeToggle.addEventListener("click", () => {
       const current = document.documentElement.getAttribute("data-theme");

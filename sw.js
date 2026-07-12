@@ -11,7 +11,7 @@
  * Cross-origin requests (e.g. Tesseract.js from jsDelivr, language data) are
  * ignored by this service worker and always go straight to the network/CDN.
  */
-const CACHE_NAME = "webocr-v1";
+const CACHE_NAME = "webocr-1783900544";
 const CORE_ASSETS = [
   "./",
   "./index.html",
