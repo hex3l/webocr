@@ -92,6 +92,22 @@
     els.runBtn.addEventListener("click", runOcr);
     els.copyBtn.addEventListener("click", copyText);
     els.clearHistory.addEventListener("click", clearHistory);
+
+    document.addEventListener("paste", (e) => {
+      if (state.busy) return;
+      const items = e.clipboardData && e.clipboardData.items;
+      if (!items) return;
+      for (const item of items) {
+        if (item.type && item.type.startsWith("image/")) {
+          const file = item.getAsFile();
+          if (file) {
+            e.preventDefault();
+            handleFile(file);
+            return;
+          }
+        }
+      }
+    });
   }
 
   function handleFile(file) {

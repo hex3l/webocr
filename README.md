@@ -4,7 +4,7 @@ A simple, fully client-side OCR web app built with [Tesseract.js](https://github
 
 ## Features
 
-- Drag & drop or browse to upload an image (PNG, JPG, WEBP, BMP).
+- Drag & drop, browse, or paste from clipboard to upload an image (PNG, JPG, WEBP, BMP).
 - 80+ Tesseract languages, selectable on demand (data cached after first use).
 - Live progress bar during OCR.
 - Editable recognized text with copy-to-clipboard.
