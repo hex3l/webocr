@@ -24,16 +24,6 @@ python3 -m http.server 8000
 
 Then open the printed URL. A real HTTP server is required because Tesseract.js loads a Web Worker and WASM, which browsers block under `file://`.
 
-## Deploy to GitHub Pages
-
-A workflow is included at `.github/workflows/deploy.yml`. To enable:
-
-1. Push the repo to GitHub on the `main` branch.
-2. In repo **Settings → Pages**, set **Source** to **GitHub Actions**.
-3. On the next push to `main` the workflow publishes the root directory. Your site will be live at `https://<user>.github.io/webocr/`.
-
-No base path configuration is needed — all asset paths in `index.html` are relative.
-
 ## How it works
 
 - `index.html` — layout and structure.
