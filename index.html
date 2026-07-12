@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebOCR — Client-side OCR with Tesseract.js</title>
+    <meta
+      name="description"
+      content="Free, private, client-side OCR in your browser. Upload an image, extract text, and review past sessions. No data ever leaves your device."
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <h1 class="brand">
+          <span class="brand-mark">W</span>
+          <span>WebOCR</span>
+        </h1>
+        <p class="tagline">Private OCR in your browser · powered by Tesseract.js</p>
+      </div>
+    </header>
+
+    <main class="container layout">
+      <section class="panel workspace" aria-label="OCR workspace">
+        <div id="dropZone" class="drop-zone" role="button" tabindex="0" aria-label="Drop an image or click to browse">
+          <svg class="drop-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M19 13v6H5v-6H3v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-2zM7 9l5 5 5-5h-3V3H10v6H7z"
+              fill="currentColor"
+            />
+          </svg>
+          <p class="drop-title">Drop an image here</p>
+          <p class="drop-hint">or click to browse · PNG, JPG, WEBP, BMP</p>
+          <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp,image/bmp" hidden />
+        </div>
+
+        <div id="previewWrap" class="preview-wrap hidden">
+          <img id="preview" alt="Selected image preview" />
+          <button id="changeImage" type="button" class="link-btn">Change image</button>
+        </div>
+
+        <div class="controls">
+          <label class="field">
+            <span class="field-label">Language</span>
+            <select id="langSelect"></select>
+          </label>
+          <div class="actions">
+            <button id="runBtn" type="button" class="btn btn-primary" disabled>Extract text</button>
+            <button id="copyBtn" type="button" class="btn" disabled>Copy text</button>
+          </div>
+        </div>
+
+        <div id="progress" class="progress hidden" aria-live="polite">
+          <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+          <p id="progressText" class="progress-text">Starting…</p>
+        </div>
+
+        <div id="resultWrap" class="result-wrap hidden">
+          <label class="field-label" for="resultText">Extracted text</label>
+          <textarea id="resultText" rows="10" spellcheck="false" placeholder="Recognized text will appear here. You can edit it before saving."></textarea>
+        </div>
+      </section>
+
+      <aside class="panel history" aria-label="Session history">
+        <div class="history-head">
+          <h2>History</h2>
+          <button id="clearHistory" type="button" class="link-btn danger" disabled>Clear all</button>
+        </div>
+        <ul id="historyList" class="history-list">
+          <li class="history-empty">No sessions yet — your OCR history will appear here.</li>
+        </ul>
+      </aside>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>Runs entirely in your browser. Images and recognized text never leave your device.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <script src="js/languages.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/ocr.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
