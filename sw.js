@@ -12,14 +12,15 @@
  * ignored by this service worker and always go straight to the network/CDN.
  */
 const CACHE_NAME = "webocr-1783900544";
+const V = "1783900544";
 const CORE_ASSETS = [
   "./",
   "./index.html",
-  "./css/styles.css",
-  "./js/languages.js",
-  "./js/db.js",
-  "./js/ocr.js",
-  "./js/app.js",
+  "./css/styles.css?v=" + V,
+  "./js/languages.js?v=" + V,
+  "./js/db.js?v=" + V,
+  "./js/ocr.js?v=" + V,
+  "./js/app.js?v=" + V,
 ];
 
 self.addEventListener("install", (event) => {
@@ -53,7 +54,7 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     (async () => {
       const cache = await caches.open(CACHE_NAME);
-      const cached = await cache.match(req, { ignoreSearch: true });
+      const cached = await cache.match(req);
       const networkFetch = fetch(req)
         .then(async (res) => {
           if (res && res.ok) {
