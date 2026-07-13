@@ -1,6 +1,8 @@
 # webocr
 
-A simple, fully client-side OCR web app built with [Tesseract.js](https://github.com/naptha/tesseract.js) and hosted on GitHub Pages. All processing happens in your browser — images and recognized text never leave your device.
+A simple, private OCR web app built with [Tesseract.js](https://github.com/naptha/tesseract.js) and hosted on GitHub Pages. All processing happens in your browser — images and recognized text never leave your device.
+
+**Available at:** https://hex3l.github.io/webocr/
 
 ## Features
 

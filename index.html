@@ -3,11 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WebOCR — Client-side OCR with Tesseract.js</title>
+    <title>WebOCR — Private OCR in Your Browser | Powered by Tesseract.js</title>
     <meta
       name="description"
-      content="Free, private, client-side OCR in your browser. Upload an image, extract text, and review past sessions. No data ever leaves your device."
+      content="WebOCR is private OCR in your browser — images never leave your device. Upload or paste an image, extract text in 80+ languages, and review past sessions. Powered by Tesseract.js."
     />
+    <link rel="canonical" href="https://hex3l.github.io/webocr/" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+    <meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1f1b18" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hex3l.github.io/webocr/" />
+    <meta property="og:site_name" content="WebOCR" />
+    <meta property="og:title" content="WebOCR — Private OCR in Your Browser, Powered by Tesseract.js" />
+    <meta
+      property="og:description"
+      content="Private OCR in your browser — images never leave your device. Upload or paste an image, extract text in 80+ languages, and review past sessions."
+    />
+    <meta property="og:image" content="https://hex3l.github.io/webocr/og-image.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="WebOCR — Private OCR in Your Browser, Powered by Tesseract.js" />
+    <meta
+      name="twitter:description"
+      content="Private OCR in your browser — images never leave your device. Upload or paste an image, extract text in 80+ languages."
+    />
+    <meta name="twitter:image" content="https://hex3l.github.io/webocr/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "WebOCR",
+        "url": "https://hex3l.github.io/webocr/",
+        "description": "Private OCR in your browser — images never leave your device. Upload or paste an image, extract text in 80+ languages, and review past sessions. Powered by Tesseract.js.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any (web browser)",
+        "browserRequirements": "Requires JavaScript and WebAssembly",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "creator": {
+          "@type": "Person",
+          "name": "hex3l",
+          "url": "https://github.com/hex3l"
+        }
+      }
+    </script>
+
     <link rel="stylesheet" href="css/styles.css?v=1783900544" />
     <script>
       (function () {
@@ -29,7 +76,7 @@
         <h1 class="brand">
           <span class="brand-mark">WebOCR</span>
         </h1>
-        <p class="tagline">100% client-side OCR · images never leave your device · powered by Tesseract.js</p>
+        <p class="tagline">Private OCR in your browser · powered by Tesseract.js</p>
       <div class="header-actions">
         <a
           id="starBtn"

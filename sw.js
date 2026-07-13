@@ -16,6 +16,7 @@ const V = "1783900544";
 const CORE_ASSETS = [
   "./",
   "./index.html",
+  "./favicon.svg",
   "./css/styles.css?v=" + V,
   "./js/languages.js?v=" + V,
   "./js/db.js?v=" + V,
