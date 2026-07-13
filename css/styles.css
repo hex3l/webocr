@@ -57,6 +57,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 body {
@@ -204,6 +205,13 @@ body {
   flex: 1;
 }
 
+@media (max-width: 640px) {
+  .tagline {
+    order: 1;
+    width: 100%;
+  }
+}
+
 @media (max-width: 860px) {
   .layout {
     grid-template-columns: 1fr;
@@ -215,6 +223,7 @@ body {
 .history {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .workspace {
@@ -311,6 +320,7 @@ textarea {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 9px 12px;
+  max-width: 100%;
 }
 
 select {
