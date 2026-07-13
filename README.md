@@ -41,7 +41,7 @@ then reload.
 - `css/styles.css` — styling and responsive layout.
 - `js/languages.js` — the list of available Tesseract languages, sorted alphabetically.
 - `js/db.js` — IndexedDB wrapper for saving/listing/deleting OCR sessions (text + image + thumbnail blobs).
-- `js/ocr.js` — Tesseract v5 worker wrapper (`createWorker(lang, 1, {logger})`). Worker, core, and language data are fetched on demand from the jsDelivr CDN and cached by the browser; the SIMD-enabled core is auto-selected where supported.
+- `js/ocr.js` — Tesseract v7 worker wrapper (`createWorker(lang, 1, {logger})`). Worker, core, and language data are fetched on demand from the jsDelivr CDN and cached by the browser; the SIMD-enabled core is auto-selected where supported.
 - `js/app.js` — UI wiring: upload/drag-drop/paste, progress, copy, result, theme toggle, history rendering, session load/delete, service worker registration (skipped on localhost).
 - `sw.js` — service worker for the app shell (stale-while-revalidate). On same-origin fetches it compares the network response byte-for-byte with the cached copy and, on a mismatch, updates the cache and notifies all clients to show a reload banner. Cross-origin requests (Tesseract CDN, language data) bypass the SW.
 

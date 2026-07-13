@@ -1,10 +1,11 @@
 /* Tesseract.js wrapper.
  *
  * The Tesseract global is provided by dist/tesseract.min.js loaded in index.html.
- * In v5, `createWorker(langs, oem, options)` loads language data and initializes
- * the recognizer in one call (loadLanguage/initialize are no-ops). Worker, core,
- * and language data are fetched on demand from the CDN and cached by the browser.
- * Tesseract.js automatically selects the SIMD-enabled core build where available.
+ * `createWorker(langs, oem, options)` loads language data and initializes the
+ * recognizer in one call (loadLanguage/initialize are no-ops since v5). Worker,
+ * core, and language data are fetched on demand from the CDN and cached by the
+ * browser. Tesseract.js automatically selects the SIMD-enabled core build where
+ * available.
  */
 const OCR = (function () {
   let worker = null;
